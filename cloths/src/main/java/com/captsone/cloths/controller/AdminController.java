@@ -7,18 +7,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.captsone.cloths.entity.Admin;
 import com.captsone.cloths.entity.User;
+import com.captsone.cloths.service.AdminserviceInteface;
 import com.captsone.cloths.service.UserserviceInteface;
 
 @RestController
-public class UserController {
+public class AdminController {
 	
 	@Autowired
-	UserserviceInteface us;
+	AdminserviceInteface as;
 	
 	@PostMapping("SingUp")
-	public String creatAccount(@RequestBody User u) {
-		int i = us.creataccount(u);
+	public String creatAccount(@RequestBody  Admin a) {
+		int i = as.creataccount(a);
 		if(i >0) {
 			return "account created succsefully";
 		}
@@ -29,11 +31,11 @@ public class UserController {
 	
 	@GetMapping("loginUser/{email}/{password}")
 	public String login(@PathVariable("email") String em,@PathVariable("password") String pwd) {
-		User u=new User();
-		u.setEmail(em);
-		u.setPassword(pwd);
+		Admin a=new Admin();
+		a.setEmail(em);
+		a.setPassword(pwd);
 		
-		int i=us.loginService(u);
+		int i=as.loginService(a);
 		if(i>0) {
 			return "login successfully";
 		}
@@ -41,7 +43,16 @@ public class UserController {
 			return "login fail";
 		}
 	}
+/*	@Autowired
+	UserserviceInteface us;
 	
+	@GetMapping("getUserDatails/{id}"){
+		public User getUserdetails() { 
+			User u = us.getdetails();
+		}
+	}
+	
+	*/
 	
 
 }

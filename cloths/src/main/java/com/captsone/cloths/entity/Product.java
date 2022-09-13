@@ -20,14 +20,29 @@ public class Product {
 	private String product_Brand;
 	private int quantity;
 	
+	public Product() {
+	}
+	
 	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="category_id", referencedColumnName = "category_id")
-	private Category tt;
+	private Category category;
 	
 	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="retailerId", referencedColumnName = "retailerId")
-	private Retailer rr;
-	
+	private Retailer retailer;
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	public void setRetailer(Retailer retailer) {
+		this.retailer = retailer;
+	}
+	public Category getCategory() {
+		return category;
+	}
+	public Retailer getRetailer() {
+		return retailer;
+	}
 	public String getProduct_name() {
 		return product_name;
 	}
@@ -57,5 +72,12 @@ public class Product {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	
+	@Override
+	public String toString() {
+		return "Product [product_name=" + product_name + ", product_id=" + product_id + ", product_price="
+				+ product_price + ", product_Brand=" + product_Brand + ", quantity=" + quantity + ", category="
+				+ category + ", retailer=" + retailer + "]";
 	}
 }
